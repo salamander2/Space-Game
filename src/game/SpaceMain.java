@@ -50,8 +50,13 @@ public class SpaceMain implements ActionListener {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.setColor(player.clr);
-			g.fillRect(player.x,  player.y,  player.width, player.height);
+			
+			if (player.img != null) {
+				g.drawImage(player.img,player.x, player.y, null);
+			} else {
+				g.setColor(player.clr);
+				g.fillRect(player.x,  player.y,  player.width, player.height);
+			}
 		}
 
 		
