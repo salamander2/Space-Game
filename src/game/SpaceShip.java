@@ -12,13 +12,15 @@ class SpaceShip extends Rectangle{
 	Color clr = Color.GREEN;  //TODO: make the enemy one a different colour
 	
 	SpaceShip(){
-		xx = 200.0;
-		yy = 700.0;
+		width = 50;
+		height = 30;
+		
+		xx = SpaceMain.panW/2 - width/2;
+		yy = SpaceMain.panH - 90;
 		
 		x = (int) xx;
 		y = (int) yy;
-		width = 50;
-		height = 30;
+		
 		
 	}
 	

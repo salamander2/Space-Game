@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
@@ -22,7 +20,7 @@ public class SpaceMain implements ActionListener {
 	
 	//graphics related
 	static int panW = 900;
-	static int panH = 900;	
+	static int panH = 600;	
 	DrawingPanel panel;
 	
 	//game objects
