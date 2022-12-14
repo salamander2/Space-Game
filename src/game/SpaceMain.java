@@ -3,12 +3,14 @@ package game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
-public class SpaceMain {
+public class SpaceMain implements ActionListener {
 
 	public static void main(String[] args) {
 		//TODO: add in the swingUtilities way of starting graphics
@@ -16,12 +18,14 @@ public class SpaceMain {
 	}
 	
 	//graphics related
-	int panW = 900;
-	int panH = 900;	
+	static int panW = 900;
+	static int panH = 900;	
 	DrawingPanel panel;
 	
 	//game objects
 	SpaceShip player = new SpaceShip();
+	Timer mainTimer = new Timer(10, this);
+	BetterKeyListener bKeyL = new BetterKeyListener(); 
 	
 	SpaceMain(){
 		panel = new DrawingPanel();
@@ -31,14 +35,15 @@ public class SpaceMain {
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		//timer.start();
+		mainTimer.start();
 	}
 	
-	class DrawingPanel extends JPanel implements KeyListener {
+	class DrawingPanel extends JPanel {
+		
 		DrawingPanel(){
 			this.setBackground(Color.BLACK);
 			this.setPreferredSize(new Dimension(panW, panH));
-			this.addKeyListener(this);
+			this.addKeyListener( bKeyL );
 			this.setFocusable(true); //needed for Jpanel & keys
 		}
 		
@@ -48,16 +53,21 @@ public class SpaceMain {
 			g.fillRect(player.x,  player.y,  player.width, player.height);
 		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			player.move( e.getKeyCode() );			
-			this.repaint();
-		}
 		
-		@Override
-		public void keyTyped(KeyEvent e) {}
-
-		@Override
-		public void keyReleased(KeyEvent e) {}
+	} //end of DrawingPanel class
+	
+	
+	/*** for mainTimer ***/
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//move ship (assuming that a key has been pressed)
+		
+		if (bKeyL.isKeyDown('A') || bKeyL.isKeyDown(37)) player.move('A');
+		if (bKeyL.isKeyDown('W') || bKeyL.isKeyDown(38)) player.move('W');
+		if (bKeyL.isKeyDown('D') || bKeyL.isKeyDown(39)) player.move('D');
+		if (bKeyL.isKeyDown('S') || bKeyL.isKeyDown(40)) player.move('S');
+		
+		
+		panel.repaint();
 	}
 }

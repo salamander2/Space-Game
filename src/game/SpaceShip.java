@@ -24,19 +24,22 @@ class SpaceShip extends Rectangle{
 	
 	void move (int key) {
 		switch (key) {
-		case 'W':
-		case 38: 
+		case 'W':		
 			yy -=vy; break;
 		case 'S':
-		case 40:
 			yy +=vy; break;
 		case 'A':
-		case 37: //left arrow
 			xx -=vx; break;
 		case 'D':
-		case 39: 
 			xx +=vx; break;
 		}
+		// wrap around on the screen
+		if (xx < 0) xx = SpaceMain.panW;
+		if (yy < 0) yy = SpaceMain.panH;
+		if (xx > SpaceMain.panW) xx = 0;
+		if (yy > SpaceMain.panH) yy = 0;
+		
+		//update final positions
 		x = (int)xx;
 		y = (int)yy;
 	}
