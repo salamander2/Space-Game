@@ -11,8 +11,11 @@ import javax.swing.*;
 public class SpaceMain {
 
 	public static void main(String[] args) {
-		//TODO: add in the swingUtilities way of starting graphics
-		new SpaceMain();		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new SpaceMain();
+			}
+		});
 	}
 	
 	//graphics related
