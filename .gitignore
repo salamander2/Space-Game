@@ -1,6 +1,7 @@
 .metadata
 #exclude classpath: for  different JRE versions
 .classpath
+.project
 bin/
 tmp/
 *.tmp
