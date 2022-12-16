@@ -45,5 +45,12 @@ class SpaceShip extends Rectangle{
 		x = (int)xx;
 		y = (int)yy;
 	}
+
+	Laser shoot() {
+		
+		//laser constructor gets the (x,y) where it should start
+		Laser z = new Laser(this.x + this.width/2, this.y + 10);
+		return z;
+	}
 	
 }
