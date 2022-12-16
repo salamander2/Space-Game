@@ -50,8 +50,8 @@ class SpaceShip extends Rectangle{
 			xx +=vx; break;
 		}
 		// wrap around on the screen
-		if (xx < 0) xx = SpaceMain.panW;
-		if (yy < 0) yy = SpaceMain.panH;
+		if (xx < 0 - width) xx = SpaceMain.panW;
+		if (yy < 0 - height) yy = SpaceMain.panH;
 		if (xx > SpaceMain.panW) xx = 0;
 		if (yy > SpaceMain.panH) yy = 0;
 		
