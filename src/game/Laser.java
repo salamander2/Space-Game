@@ -8,15 +8,16 @@ import java.awt.Rectangle;
 class Laser extends Rectangle{
 	
 	static final int MAXSHOT = 15;
-	static final int SHOTDELAY = 400;  //milliseconds
+	static final int SHOTDELAY = 300;  //milliseconds
 	static Color clr = Color.YELLOW;
 	static final int RANGE = 500;  //how many pixels the laser will go. To make it interesting
+	
+	private static long lastShot = System.currentTimeMillis();
 	
 	//double precision not used in this class.
 	private int dist = 0;
 	int vx = 0;
 	int vy = -3;	
-	
 	
 	Laser(int x, int y) {
 		width = 2;
@@ -24,6 +25,17 @@ class Laser extends Rectangle{
 		this.x = x;
 		this.y = y;
 	}
+	
+	static boolean canShoot() {
+		if (System.currentTimeMillis() - lastShot > Laser.SHOTDELAY) {			
+			lastShot = System.currentTimeMillis();
+			return true;
+		}
+		return false;
+	}
+	
+//	static long getLastShot() { return lastShot; }
+//	static void setLastShot() { lastShot = System.currentTimeMillis(); }
 	
 	boolean move() {
 		x += vx;

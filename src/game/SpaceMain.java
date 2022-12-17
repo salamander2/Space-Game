@@ -85,12 +85,9 @@ public class SpaceMain implements ActionListener {
 		
 		//shoot laser using space
 		if (bKeyL.isKeyDown(' ')) {
-
-			if (laserList.size() < Laser.MAXSHOT) {
+			if (Laser.canShoot() && laserList.size() < Laser.MAXSHOT) {
 				laserList.add( player.shoot() );
 			}
-			
-			
 		}
 		
 		//move all objects. Should this be in a separate timer?
