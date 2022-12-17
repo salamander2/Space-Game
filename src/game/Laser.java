@@ -10,34 +10,34 @@ class Laser extends Rectangle{
 	static final int MAXSHOT = 15;
 	static final int SHOTDELAY = 400;  //milliseconds
 	static Color clr = Color.YELLOW;
+	static final int RANGE = 500;  //how many pixels the laser will go. To make it interesting
 	
-	static int range = 1500;  //how many pixels the laser will go. To make it interesting
-	int displ = 0;
-	double vx = 0.0;
-	double vy = -3.0;	
-	double xx, yy;  //double versions of x,y for precise moving
+	//double precision not used in this class.
+	private int dist = 0;
+	int vx = 0;
+	int vy = -3;	
 	
 	
 	Laser(int x, int y) {
 		width = 2;
 		height = 10;
-//		xx = player.x + player.width/2;
-//		yy = player.y + 10;
-//		x = (int)x;
-//		y = (int)y;
 		this.x = x;
 		this.y = y;
 	}
 	
-	void move() {
-		//x += vx;
+	boolean move() {
+		x += vx;
 		y += vy;
-		displ += vy;
-		if (displ > range) {
-			//TODO somehow delete this laser shot!
-		}
 		
-		//wrap off the top of the screen
-		if (y < 0) y = SpaceMain.panH;
+		dist += Math.abs(vy);
+		if (dist > RANGE) return false;
+		
+		//Standard wrapping code
+		if (x < 0 - width) x = SpaceMain.panW;
+		if (y < 0 - height) y = SpaceMain.panH;
+		if (x > SpaceMain.panW) x = 0;
+		if (y > SpaceMain.panH) y = 0;
+		
+		return true;
 	}
 }

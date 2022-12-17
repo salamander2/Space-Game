@@ -89,8 +89,17 @@ public class SpaceMain implements ActionListener {
 		}
 		
 		//move all objects. Should this be in a separate timer?
-		for (Laser laser : laserList) {
-			laser.move();
+		
+		/* Concurrent modification error!
+		Iterator<Laser> iter = laserList.iterator();
+		while ( iter.hasNext() ) {
+			Laser laser = iter.next();
+			if (!laser.move()) laserList.remove(laser);
+		} */
+		
+		for (int i = laserList.size()-1; i >= 0; i--) {
+			Laser laser = laserList.get(i);	
+			if (!laser.move()) laserList.remove(i);
 		}
 		
 		panel.repaint();
