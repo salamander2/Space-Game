@@ -17,7 +17,8 @@ class Laser extends Rectangle{
 	//double precision not used in this class.
 	private int dist = 0;
 	int vx = 0;
-	int vy = -3;	
+	int vy = -3;
+	int damage = 10;
 	
 	Laser(int x, int y) {
 		width = 2;

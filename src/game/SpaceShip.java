@@ -8,26 +8,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-class SpaceShip extends Rectangle{
-	//Note: x,y,width,height (all ints) come from Rectangle
+class SpaceShip extends Ship {
 	
-	double xx, yy;  //double versions of x,y for precise moving
-	double vx = 5.2;
-	double vy = 6.3;
-	Color clr = Color.GREEN;  //TODO: make the enemy one a different colour
-	BufferedImage img;
 	
 	SpaceShip(){
-		width = 50;
-		height = 30;
-		
-		try {
-			img = ImageIO.read(new File("krakenSM.png"));
-			width = img.getWidth();
-			height = img.getHeight();
-		} catch (IOException e) {
-			System.out.println("Warning: gitkrakenSM.png failed to load");
-		}		
+		clr = Color.GREEN; //player ship is different colour
+		vx++; vy++; // Player is faster than enemy ship
 		
 		xx = SpaceMain.panW/2 - width/2;
 		yy = SpaceMain.panH - 90;
@@ -35,7 +21,13 @@ class SpaceShip extends Rectangle{
 		x = (int) xx;
 		y = (int) yy;
 		
-		
+		try {
+			img = ImageIO.read(new File("krakenSM.png"));
+			width = img.getWidth();
+			height = img.getHeight();
+		} catch (IOException e) {
+			System.out.println("Warning: gitkrakenSM.png failed to load");
+		}
 	}
 	
 	void move (int key) {
@@ -60,11 +52,6 @@ class SpaceShip extends Rectangle{
 		y = (int)yy;
 	}
 
-	//Laser must be returned so that it can be added to the arraylist
-	Laser shoot() {	
-		//laser constructor gets the (x,y) where it should start
-		Laser z = new Laser(this.x + this.width/2, this.y + 10);
-		return z;
-	}
+	
 	
 }

@@ -27,6 +27,7 @@ public class SpaceMain implements ActionListener {
 	
 	//game objects
 	SpaceShip player = new SpaceShip();
+	Ship enemy = new Ship();
 	Timer mainTimer = new Timer(10, this);
 	BetterKeyListener bKeyL = new BetterKeyListener(); 
 	ArrayList<Laser> laserList = new ArrayList<Laser>();
@@ -63,6 +64,10 @@ public class SpaceMain implements ActionListener {
 				g.setColor(player.clr);
 				g.fillRect(player.x,  player.y,  player.width, player.height);
 			}
+			
+			g.setColor(enemy.clr);
+			g.fillRect(enemy.x,  enemy.y,  enemy.width, enemy.height);
+			
 			g.setColor(Laser.clr);
 			for (Laser laser : laserList) {
 				g.fillRect(laser.x,  laser.y, laser.width, laser.height);
@@ -90,14 +95,8 @@ public class SpaceMain implements ActionListener {
 			}
 		}
 		
-		//move all objects. Should this be in a separate timer?
-		
-		/* Concurrent modification error!
-		Iterator<Laser> iter = laserList.iterator();
-		while ( iter.hasNext() ) {
-			Laser laser = iter.next();
-			if (!laser.move()) laserList.remove(laser);
-		} */
+		//move all objects. Should this be in a separate timer?	
+		enemy.move(player);
 		
 		for (int i = laserList.size()-1; i >= 0; i--) {
 			Laser laser = laserList.get(i);	
