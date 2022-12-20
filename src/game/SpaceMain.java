@@ -56,6 +56,7 @@ public class SpaceMain implements ActionListener {
 		}
 		
 		public void paintComponent(Graphics g) {
+			if(player.health < 35) this.setBackground(new Color(100,0,0));
 			super.paintComponent(g);
 			
 			if (player.img != null) {
@@ -65,13 +66,16 @@ public class SpaceMain implements ActionListener {
 				g.fillRect(player.x,  player.y,  player.width, player.height);
 			}
 			
-			g.setColor(enemy.clr);
-			g.fillRect(enemy.x,  enemy.y,  enemy.width, enemy.height);
+			if(enemy.isAlive()) {
+				g.setColor(enemy.clr);
+				g.fillRect(enemy.x,  enemy.y,  enemy.width, enemy.height);
+			}
 			
 			g.setColor(Laser.clr);
 			for (Laser laser : laserList) {
 				g.fillRect(laser.x,  laser.y, laser.width, laser.height);
 			}
+			g.drawString("Enemy health = " + enemy.health, 10,50);
 		}
 
 		
@@ -101,6 +105,25 @@ public class SpaceMain implements ActionListener {
 		for (int i = laserList.size()-1; i >= 0; i--) {
 			Laser laser = laserList.get(i);	
 			if (!laser.move()) laserList.remove(i);
+		}
+		
+		//check collisions
+		for (Laser laser : laserList) {
+			if (enemy.isAlive() && laser.intersects(enemy)) {
+				enemy.health -= laser.damage;				
+				if (enemy.health <= 0) enemy.die();
+				laserList.remove(laser);
+				break;
+			}
+		}
+		if (enemy.intersects(player)) {
+			//?? g.setBackground(Color.red.darker());
+			
+			//FIXME get actual damage 
+			//FIXME move enemy to random location 
+			player.health -= 50;
+			enemy.xx = 100;
+			enemy.yy = 100;
 		}
 		
 		panel.repaint();

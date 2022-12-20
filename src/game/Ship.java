@@ -12,6 +12,7 @@ class Ship extends Rectangle {
 		double vy = 5.3;
 		Color clr = Color.ORANGE; 
 		int health = 70;
+		private boolean isAlive = true;
 		BufferedImage img;
 		
 		Ship(){
@@ -45,4 +46,8 @@ class Ship extends Rectangle {
 			Laser z = new Laser(this.x + this.width/2, this.y + 10);
 			return z;
 		}
+		
+		boolean isAlive() 	{ return isAlive; }
+		void 	die() 		{ isAlive = false; }
+		
 }

@@ -18,7 +18,7 @@ class Laser extends Rectangle{
 	private int dist = 0;
 	int vx = 0;
 	int vy = -3;
-	int damage = 10;
+	int damage = 20;
 	
 	Laser(int x, int y) {
 		width = 2;
