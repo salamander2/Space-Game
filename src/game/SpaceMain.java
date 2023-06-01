@@ -118,6 +118,7 @@ public class SpaceMain implements ActionListener {
 			}
 		}
 		if (enemy.intersects(player)) {
+			//?? g.setBackground(Color.red.darker());
 			
 			//FIXME get actual damage 
 			//FIXME move enemy to random location 
